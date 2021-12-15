@@ -16,13 +16,13 @@ Assumptions
 1) Buyers are first timers
 2) Buyers are aged 35 and below
 3) Buyers are engaged or married
-     a) Additional restrictions apply to Singapore citizens who purchase HDB flats
+   - Additional restrictions apply to Singapore citizens who purchase HDB flats
 4) HDB price is paid with CPF OA (includes deposit) whereas fees and charges are paid with cash
-     a) Reduces loan amount and interest on interest owed
-     b) Reduces conveyancing fees for resale flats
+   - Reduces loan amount and interest on interest owed
+   - Reduces conveyancing fees for resale flats
 5) No cash over valuation for resale flats
-     a) Cash over valuation must be paid in cash
-     b) Loan amount will be the lower of sale price and HDB valuation of flat
+   - Cash over valuation must be paid in cash
+   - Loan amount will be the lower of sale price and HDB valuation of flat<br /><br />
 
 
 Pre-requisites
