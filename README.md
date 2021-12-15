@@ -1,6 +1,6 @@
-# HDB Payment Calculator
+# HDB Payments Calculator
 ## Description
-Are you a first-time homeowner? The HDB payments calculator allows you to calcualte and compare costs and fees across multiple HDB flats. Make a quick and informed buying decision on flats that meet your budget.
+Are you a first-time homeowner? The payments calculator allows you to calculate and compare costs and fees across multiple HDB flats. Make a quick and informed buying decision on flats that meet your budget.
 <br />
 
 ### Features
