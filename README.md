@@ -24,7 +24,7 @@ Are you a first-time homeowner? The HDB payments calculator allows you to calcua
 <br /><br />
 
 ## Pre-requisites
-- Download and fill out [Housing Information](hdb-information_TEMPLATE.xlsx) file
+- Download and fill out [Housing Information](hdb-information_template.xlsx) file
 - Install numpy
   ```py
   pip install numpy
@@ -51,8 +51,8 @@ Are you a first-time homeowner? The HDB payments calculator allows you to calcua
 <br />
 
 ## Contribute
-- Issue Tracker: github
-- Source Code: github.com/mqadhin/hdb-payment-calculator/blob/main/hdb-payments-calculator.py
+- Issue Tracker: tbc
+- Source Code: https://github.com/mqadhin/hdb-payment-calculator/blob/main/hdb-payments-calculator.py
 
 ### Contact
 If you are having issues, please let me know: m.qadhin@gmail.com
