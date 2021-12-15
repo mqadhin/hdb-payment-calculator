@@ -51,7 +51,7 @@ If you are having issues, please let me know: m.qadhin@gmail.com
 
 References
 ========
-https://www.hdb.gov.sg/residential/buying-a-flat/new/finance/costs-and-fees
-https://www.hdb.gov.sg/residential/buying-a-flat/resale/financing/costs-and-fees
-https://homes.hdb.gov.sg/home/calculator/payment-plan
-https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PHomePage.jsp
+- https://www.hdb.gov.sg/residential/buying-a-flat/new/finance/costs-and-fees
+- https://www.hdb.gov.sg/residential/buying-a-flat/resale/financing/costs-and-fees
+- https://homes.hdb.gov.sg/home/calculator/payment-plan
+- https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PHomePage.jsp
