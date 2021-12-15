@@ -55,7 +55,7 @@ Are you a first-time homeowner? The payments calculator allows you to calculate 
 - Source Code: https://github.com/mqadhin/hdb-payment-calculator/blob/main/hdb-payments-calculator.py
 
 ### Contact
-If you are having issues, please let me know: m.qadhin@gmail.com
+If you are having issues, please let me know: md.qadhin@outlook.com
 <br /><br />
 
 ## References
