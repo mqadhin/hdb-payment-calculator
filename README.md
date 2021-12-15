@@ -11,20 +11,20 @@ Are you a first-time homeowner? The HDB payments calculator allows you to calcua
 
 
 ### Assumptions
-1) Buyers are first timers
-2) Buyers are aged 35 and below
-3) Buyers are engaged or married
+1. Buyers are first timers
+2. Buyers are aged 35 and below
+3. Buyers are engaged or married
    - Additional restrictions apply to single Singapore citizens who purchase HDB flats
-4) HDB price is paid with CPF OA (includes deposit) whereas fees and charges are paid with cash
+4. HDB price is paid with CPF OA (includes deposit) whereas fees and charges are paid with cash
    - Reduces loan amount and interest on interest owed
    - Reduces conveyancing fees for resale flats
-5) No cash over valuation for resale flats
+5. No cash over valuation for resale flats
    - Cash over valuation must be paid in cash
    - Loan amount will be the lower of sale price and HDB valuation of flat
 <br /><br />
 
 ## Pre-requisites
-- Download and fill out [Housing Information]() file
+- Download and fill out [Housing Information](hdb-information_TEMPLATE.xlsx) file
 - Install numpy
   ```py
   pip install numpy
@@ -40,15 +40,15 @@ Are you a first-time homeowner? The HDB payments calculator allows you to calcua
 <br />
 
 ## Installation
-1) Change directory to file save location. Example:
+1. Change directory to file save location. Example:
    ```
    cd Downloads
    ```
-3) Run python code
+2. Run python code
    ```
    python hdb-payments-calculator.py
    ```
-<br /><br />
+<br />
 
 ## Contribute
 - Issue Tracker: github.com/
