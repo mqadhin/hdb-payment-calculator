@@ -264,25 +264,25 @@ def calculate_proximity_grant(proximity):
 
 
 ### Calculate fees and charges
-def calculate_loan(price, cpf, ltv):
+def calculate_loan(price, cpf, lender, ltv):
     
     '''
     Calculate housing loan required
     
     Parameters:
-    price -- (float) price/valuation of flat
-    cpf   -- (float) combined CPF OA balance including grants
-    ltv   -- (float) loan-to-value ratio based on lender selected
+    price  -- (float) price/valuation of flat
+    cpf    -- (float) combined CPF OA balance including grants
+    lender -- (str) either 'hdb' or 'bank'
+    ltv    -- (float) loan-to-value ratio based on lender selected
     '''
     
-    # Determine multiplier of price; bank loans require 5% cash deposit
-    if ltv == .75:
-        m = .2
-    elif ltv == .9:
-        m = .1
-    
+    if lender == 'hdb':
+        m = 1 - ltv
+    if lender == 'bank':
+        m = 1 - ltv - .05
+
     # Calculate loan amount, adjusting for cpf balance
-    if cpf > m*price:
+    if cpf > m * price:
         return max((m+ltv)*price - cpf, 0)
     else:
         return ltv * price
@@ -392,7 +392,7 @@ def calculate_other_fees(sale_mode, loan, survey_fee, mortgage_escrow=38.3,lease
 
 
 ### Calculate cash requirements
-def calculate_deposit_shortfall(cpf, deposit, fees, ltv):
+def calculate_deposit_shortfall(cpf, deposit, fees, lender):
     
     '''
     Calculate cash required for desposit, fees and charges
@@ -401,14 +401,14 @@ def calculate_deposit_shortfall(cpf, deposit, fees, ltv):
     cpf     -- (float) combined CPF OA balance including grants 
     deposit -- (float) deposit required based on lender selected
     fees    -- (float) fees and charges payable to HDB
-    ltv     -- (float) loan-to-value ratio based on lender selected
+    lender  -- (str) either 'hdb' or 'bank'
     '''
     
     # Determine multiplier of price; bank loans require 5% cash deposit
-    if ltv == .75:
-        m = .8
-    elif ltv == .9:
+    if lender == 'hdb':
         m = 1
+    elif lender == 'bank':
+        m = .8
         
     if cpf > m*deposit:
         return (1-m)*deposit + fees
@@ -452,7 +452,7 @@ def calculate_financing(tbl, lender, cpf_monthly):
     df = tbl.copy()
     
     # Get loan-to-value ratio based on lender
-    ltvs = {'hdb':.9, 'bank':.75}
+    ltvs = {'hdb':.85, 'bank':.75}
     ltv = ltvs[lender]
     
     # Get housing loan interest rate
@@ -465,20 +465,18 @@ def calculate_financing(tbl, lender, cpf_monthly):
     # Calculate deposit and mortgage
     df['Deposit'] = (1-ltv) * df['Price']
     df['Lender'] = lender
-    df['Loan'] = df.apply(lambda x: calculate_loan(x['Price'], x['CPF_w_Grants'], ltv), axis=1)
+    df['Loan'] = df.apply(lambda x: calculate_loan(x['Price'], x['CPF_w_Grants'], lender, ltv), axis=1)
     df['Mortgage'] = round(df['Loan'] * r * (1+r)**period/((1+r)**period - 1), 2)
 
     # Calculate fees and charges
     df['Stamp_Duty'] = df['Price'].apply(calculate_bsd)
-    df['Conveyancing_Fee'] = df.apply(lambda x: calculate_conveyancing_fee(x['Sale_Mode'], x['Price'], x['Loan'], gst)
-                                      , axis=1)
+    df['Conveyancing_Fee'] = df.apply(lambda x: calculate_conveyancing_fee(x['Sale_Mode'], x['Price'], x['Loan'], gst), axis=1)
     df['Survey_Fee'] = df.apply(lambda x: calculate_survey_fee(x['Flat_Type'], gst), axis=1)
     df['Other_Fees'] = df.apply(lambda x: calculate_other_fees(x['Sale_Mode'], x['Loan'], x['Survey_Fee']), axis=1)
     df['Total_Fees'] = df['Stamp_Duty'] + df['Conveyancing_Fee'] + df['Other_Fees']
     
     # Calculate cash required for deposit and fees
-    df['Deposit_in_Cash'] = df.apply(lambda x: calculate_deposit_shortfall(x['CPF_w_Grants'] ,x['Deposit'], x['Total_Fees'],
-                                                                           ltv), axis=1)
+    df['Deposit_in_Cash'] = df.apply(lambda x: calculate_deposit_shortfall(x['CPF_w_Grants'] ,x['Deposit'], x['Total_Fees'], lender), axis=1)
     
     # Calculate cash required for mortgage payments
     df['Mortgage_in_Cash'] = df.apply(lambda x: calculate_mortgage_shortfall(x['Mortgage'], cpf_monthly), axis=1)
@@ -511,8 +509,7 @@ hdb = get_file()
 # Get income and CPF information
 incomes, cpfs = get_buyer_details()
 cpf_monthly = calculate_monthly_cpf(incomes)
-hdb['CPF_w_Grants'] = hdb.apply(lambda x: calculate_cpf_total(x['Sale_Mode'], x['Flat_Type'], x['Proximity'], sum(incomes),
-                                                              sum(cpfs)), axis=1)
+hdb['CPF_w_Grants'] = hdb.apply(lambda x: calculate_cpf_total(x['Sale_Mode'], x['Flat_Type'], x['Proximity'], sum(incomes), sum(cpfs)), axis=1)
 
 # Calculate financing
 dfs = []
